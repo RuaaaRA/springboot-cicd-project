@@ -20,11 +20,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: 🛠️ Make mvnw executable
+      run: chmod +x ./mvnw
+
     - name: 🧪 Build & Test with Maven
       run: ./mvnw clean verify
-
-    - name: 🐳 Build Docker Image
-      run: docker build -t springboot-cicd-app .
-
-    - name: 🧾 Show Docker Images
-      run: docker images
