@@ -34,6 +34,12 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
+        echo "🔐 Logging into Docker Hub..."
         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        docker tag springboot-app $DOCKER_USERNAME/springboot-app:latest
-        docker push $DOCKER_USERNAME/springboot-app:latest
+
+        IMAGE_NAME="$DOCKER_USERNAME/springboot-app:latest"
+        echo "🏷️ Tagging image as $IMAGE_NAME"
+        docker tag springboot-app "$IMAGE_NAME"
+
+        echo "📤 Pushing image to Docker Hub..."
+        docker push "$IMAGE_NAME"
