@@ -29,12 +29,11 @@ jobs:
     - name: 📦 Build Docker Image
       run: docker build -t springboot-app .
 
-    # هذه الخطوة ستكون مفعلة لاحقًا عند تجهيز Docker Hub
-    # - name: 🚀 Push to Docker Hub
-    #   env:
-    #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-    #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    #   run: |
-    #     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    #     docker tag springboot-app $DOCKER_USERNAME/springboot-app:latest
-    #     docker push $DOCKER_USERNAME/springboot-app:latest
+    - name: 🚀 Push to Docker Hub
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker tag springboot-app $DOCKER_USERNAME/springboot-app:latest
+        docker push $DOCKER_USERNAME/springboot-app:latest
